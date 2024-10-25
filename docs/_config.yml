@@ -1,0 +1,13 @@
+title: A tutorial for auto-07p
+description: A step-by-step guide on how to perform numerical bifurcation analysis with auto-07p
+remote_theme: carlosperate/jekyll-theme-rtd
+
+# Theme settings:
+site_author: Raul de Palma Aristides and Pau Clusella
+repo_url: "https://github.com/pclus/autoLearn"
+edit_on_github: true
+github_docs_folder: true
+sticky_navigation: true
+prev_next_buttons_location: bottom
+search_enabled: true
+hljs_style: github-gist
