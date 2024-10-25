@@ -1,3 +1,9 @@
+---
+layout: default
+title: Kuramoto-Sakaguchi
+nav_order: 1
+---
+
 # Bifurcation diagram of two populations of heterogeneous Kuramoto-Sakaguchi oscillators
 
 These are commands for the Python interface of `auto-07p`.
