@@ -1,9 +1,10 @@
-
 ---
 layout: default
 title: Kuramoto-Sakaguchi
 nav_order: 1
 ---
+
+{% include mathjax.html %}
 
 # Kuramoto-Sakaguchi
 

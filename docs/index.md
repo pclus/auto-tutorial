@@ -1,9 +1,10 @@
-{% include mathjax.html %}
 ---
 layout: default
 title: Index
 nav_exclude: true
 ---
+
+{% include mathjax.html %}
 
 # Introduction
 
