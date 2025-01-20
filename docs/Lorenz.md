@@ -58,3 +58,4 @@ This part of the solution can be plotted normally:
 ```
 plt.scatter(lc1['r'],lc1['x_min'], c=2 * (pt_vals_2(lc1) < 0), cmap=greys, s=0.8)
 ```
+Inside the file lorenz.py you will find the complete code with the matplotlib instructions to plot the results!
