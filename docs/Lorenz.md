@@ -9,7 +9,7 @@ Check:
 These are commands for the Python interface of auto-07p.
 
 ## Provide files:
-* lorenz.f90 :  Encodes the system equations, the corresponding Jacobian, and a function to save maxima and minima of limit-cycles.
+* lorenz.f90 :  Encodes the system equations, the corresponding Jacobian, and a function to save maxima and minima of limit cycles.
 * c.lorenz : constants of auto-07p.
 * lorenz.py: code in python/auto-07p to run the bifurcation diagram.
 
@@ -37,7 +37,7 @@ print(fp)
   BR    PT  TY  LAB       r          L2-NORM          x             y             z           x_min     
    2   328  HB  204   2.14286E+01   2.23392E+01   6.39196E+00   6.39196E+00   2.04286E+01  -1.00000E+01
    2   380  UZ  205   2.50000E+01   2.59230E+01   6.92820E+00   6.92820E+00   2.40000E+01  -1.00000E+01
-...
+```
 Notice that auto takes care of continuing along the branch that emerges at the pitchfork bifurcation automatically.
 It only gives us one due to the symmetric nature of it.
 The two branches are organized according to their 'BR' value, so to work with them we need to specify them:
