@@ -20,8 +20,8 @@ Notice that $\mu$ in the manuscript corresponds to `p` in these codes.
 
 The software requires at least two files to run, which we provide and should not be modified:
 
-- `oa2.f90` provides the system equations and the corresponding Jacobian. We also modified the options in the file to provide the maxima and minima of limit-cycles. 
-- `c.oa2` provides the default constants for `auto-07`. These can be overwritten within the program, thus no need to modify this file.  
+- [`oa2.f90`](https://github.com/pclus/auto-tutorial/blob/main/src/KuramotoSakaguchi/oa2.f90) provides the system equations and the corresponding Jacobian. We also modified the options in the file to provide the maxima and minima of limit-cycles. 
+- [`c.oa2`](https://github.com/pclus/auto-tutorial/blob/main/src/KuramotoSakaguchi/c.oa2) provides the default constants for `auto-07`. These can be overwritten within the program, thus no need to modify this file.  
 
 ## Bifurcations along $K$ for fixed $p=0.9$
 
