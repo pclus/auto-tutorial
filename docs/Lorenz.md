@@ -1,3 +1,12 @@
+---
+layout: default
+title: Index
+nav_order: 1
+nav_exclude: false
+---
+
+{% include mathjax.html %}
+
 # Lorenz system
 
 Bifurcation diagram for the Lorenz system.

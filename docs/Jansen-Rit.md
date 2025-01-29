@@ -1,3 +1,13 @@
+---
+layout: default
+title: Index
+nav_order: 3
+nav_exclude: false
+---
+
+{% include mathjax.html %}
+
+
 # Jansen-Rit
 
 Bifurcation diagram for the Jansen-Rit neural mass model.

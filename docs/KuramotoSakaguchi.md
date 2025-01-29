@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Kuramoto-Sakaguchi
-nav_order: 2
+nav_order: 4
 ---
 
 {% include mathjax.html %}
