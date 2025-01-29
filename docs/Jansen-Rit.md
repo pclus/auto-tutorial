@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Index
+title: Jansen-Rit
 nav_order: 5
 ---
 

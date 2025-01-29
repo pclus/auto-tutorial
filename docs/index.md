@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Index
+title: Introduction
 nav_order: 1
 nav_exclude: false
 ---
