@@ -1,8 +1,7 @@
 ---
 layout: default
 title: Index
-nav_order: 3
-nav_exclude: false
+nav_order: 5
 ---
 
 {% include mathjax.html %}

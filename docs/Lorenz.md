@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Index
-nav_order: 1
+nav_order: 3
 nav_exclude: false
 ---
 
