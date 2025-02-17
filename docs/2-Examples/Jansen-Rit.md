@@ -24,13 +24,13 @@ to generate the bifurcation diagram of the system.
 
 ## Provided files:
 
-* `jrnmm.f90`:  Encodes the system equations, the corresponding Jacobian, and a function to save maxima and minima of limit-cycles in the system variable $y=y_1-y_2$. [(download it here)](https://github.com/pclus/auto-tutorial/blob/main/src/Jansen/jrnmm.f90)
-* `c.jrnmm`: constants of auto-07p. [(download it here)](https://github.com/pclus/auto-tutorial/blob/main/src/Jansen/c.jrnmm)
+* `jrnmm.f90`:  Encodes the system equations, the corresponding Jacobian, and a function to save maxima and minima of limit-cycles in the system variable $y=y_1-y_2$ [(download it here)](https://github.com/pclus/auto-tutorial/blob/main/src/Jansen/jrnmm.f90).
+* `c.jrnmm`: constants of auto-07p [(download it here)](https://github.com/pclus/auto-tutorial/blob/main/src/Jansen/c.jrnmm).
 
 ## Tutorial:
 
 We start by obtaining the fixed points as a function of the parameter $p$.
-Thanks to the functions `GETUY_MIN` and `GETUY_MAX` defined in the `jrnmm.f90` file, auto-07p returns the values of 'y' as defined in [1].
+Thanks to the functions `GETUY_MIN` and `GETUY_MAX` defined in the `jrnmm.f90` file, auto-07p returns the values of 'y' as defined in [[1]](#1).
 
 ```
 # Use Euler integrator up to steady state to initialize the diagram
