@@ -9,36 +9,40 @@ nav_order: 5
 
 # Jansen-Rit
 
-Bifurcation diagram for the Jansen-Rit neural mass model.
 
-Check: 
+The Jansen's, or Jansen-Rit, neural mass model was developed in the 90s to model
+the emergence of oscillatory activity in cortical columns. 
+A detailed description of the biophysical grounds of the system,
+the governing equations, and their dynamics can be found in the seminal paper of 
+Grimbert and Faugeras: 
 
-(1) Bifurcation analysis of Jansen's neural mass model. Grimbert and Faugeras (2006).
+<a id="1">[1]</a> 
+F. Grimbert, O. Faugeras; Bifurcation Analysis of Jansen's Neural Mass Model. Neural Comput 2006; 18 (12): 3052–3068 [(link)](https://doi.org/10.1162/neco.2006.18.12.3052)
 
-(2) Complex spatiotemporal oscillations emerge from transverse instabilities in large-scale brain networks. Clusella et al. (2023).
+Here we provide the necessary files and a steb-by-steb commands for the Python interface of auto-07p
+to generate the bifurcation diagram of the system.
 
-These are commands for the Python interface of auto-07p.
+## Provided files:
 
-## Provide files:
-* jrnmm.f90 :  Encodes the system equations, the corresponding Jacobian, and a function to save maxima and minima of limit-cycles.
-* c.jrnmm : constants of auto-07p.
-* jrnmm.py: code in python/auto-07p to run the bifurcation diagram.
+* `jrnmm.f90`:  Encodes the system equations, the corresponding Jacobian, and a function to save maxima and minima of limit-cycles in the system variable $y=y_1-y_2$. [(download it here)](https://github.com/pclus/auto-tutorial/blob/main/src/Jansen/jrnmm.f90)
+* `c.jrnmm`: constants of auto-07p. [(download it here)](https://github.com/pclus/auto-tutorial/blob/main/src/Jansen/c.jrnmm)
 
 ## Tutorial:
 
-Initializing and finding the fixed points as a function of the parameter p. Thanks to our functions GETUY_MIN and GETUY_MAX defined in the jrnmm.f90 file, auto returns the values of 'y' as defined in (1).
+We start by obtaining the fixed points as a function of the parameter $p$.
+Thanks to the functions `GETUY_MIN` and `GETUY_MAX` defined in the `jrnmm.f90` file, auto-07p returns the values of 'y' as defined in [1].
 
 ```
 # Use Euler integrator up to steady state to initialize the diagram
 init=run('jrnmm',IPS=-2,NMX=100000,PAR={'p':-100.0}) # Start from p = -100.
 ic=init(201)
 # Continue along p, up to p = 500, to uncover the bifurcations (2 saddle-node and 3 Hopf)                                                
-fp=run(ic,IPS=1,NMX=10000,ISW=1,ICP=[1],UZSTOP={'p' : 500.0}
+fp=run(ic,IPS=1,NMX=10000,ISW=1,ICP=['p'],UZSTOP={'p' : 500.0})
 ```
-)
-Notice that we are using ISW = 1: which means that we are carrying a one-dimensional bifurcation exploration. 
-ICP[1]: this command sets the continuation parameter to '1' (which is p according to c.jrnmm).
-Check that we can access the content of fp by typing:
+
+Notice that we are using `ISW = 1`,  which means that we are carrying a one-dimensional bifurcation exploration. Also, we set our continuation parameter to be $p$ with
+ `ICP=['p']` (this would be equivalent to set `ICP=[1]`).
+Check that we can access the content of `fp` by typing:
 ```
 print(fp)
  BR    PT  TY  LAB       p          L2-NORM          y0            y1            y2            y3            y4            y5      
@@ -53,27 +57,34 @@ print(fp)
    1  3698  LP  210  -4.13014E+01   1.55772E+01   6.61077E-02   1.33511E+01   8.02452E+00  -4.23326E-24   0.00000E+00   0.00000E+00
    1  3994  HB  211  -1.21475E+01   1.89401E+01   7.98955E-02   1.60292E+01   1.00888E+01   4.71226E-27   0.00000E+00   0.00000E+00
 ...
-The fixed points can be easily plotted with matplotlib.pyplot:
 ```
+
+Auto has detected four bifurcations: two saddle-node (`LP`) and three Hopf (`HB`).
+The fixed points can be easily plotted with `matplotlib.pyplot`:
+```
+import matplotlib.pyplot as plt
 plt.plot(fp['p'],fp['y1']-fp['y2'])
 plt.show()
 ```
+The stability of each fixed point is stored in the `PT` column, where negative values represent stability, and positive values indicate instability. 
+We can easily access them by defining the function:
 ```
-The stability of each fixed point is stored in the PT column, where negative values represent stability and positive instability. 
-We can easily access them by defining the function
-```
+import numpy as np
 def pt_vals(f):
 	return np.array([f[0][i]['PT'] for i in range(len(f[0]))])
+
 ```
-hence, we can combine it to plot the fixed points with their stability:
+We can use this function to plot the fixed points with their stability:
 ```
-plt.scatter(fp['p'],fp['y1'] - fp['y2'], c=2 * (pt_vals(fp) < 0), cmap=purples, s=0.1)
+from matplotlib import colormaps
+plt.scatter(fp['p'],fp['y1'] - fp['y2'], c=2 * (pt_vals(fp) < 0), cmap='Purples', s=0.1)
 ```
 To display the bifurcation points in our plot, we can define the function:
 ```
 def bifs(f,par):
 	exceptions = ['No Label', 'RG', 'EP', 'UZ']  # List of exceptions
 	return [[f[0][i]['TY name'],f[0][i][par]] for i in range(len(f[0])) if f[0][i]['TY name'] not in exceptions]
+
 ```
 and add it to our plot:
 
@@ -82,14 +93,24 @@ bfp = bifs(fp,'p')
 for b in bfp:
 	plt.axvline(b[1],color="black", ls="--",alpha=0.7)
 
-plt.scatter(fp['p'],fp['y1'] - fp['y2'], c=2 * (pt_vals(fp) < 0), cmap=purples, s=0.1)
+plt.scatter(fp['p'],fp['y1'] - fp['y2'], c=2 * (pt_vals(fp) < 0), cmap='Purples', s=0.1)
 ```
-Ok, so now we can proceed to evaluate the limit cycles. We start from the first Hopf and set (IPS=2). This branch dies on a SNIC bifurcation, characterized by an infinite period and thus we stop it at period = 100.0.
+
+
+Now we can proceed to compute the limit-cycles and their stability.
+
+We start from the first Hopf bufrcation and set `IPS=2`.
+This branch dies on a SNIC bifurcation, characterized by an infinite period and thus we stop the continuation when the period reaches 100.0.
+Auto always stores the period of a limit-cycle in the auxiliary parameter 11, which is named `'PERIOD'`:
+
 ```
 hb1=fp('HB1')                                                                                   
 lc1=run(hb1,IPS=2,ISP=2,ICP=[1,11,2,3,4],NMX=20000,ISW=1, UZSTOP={'PERIOD' : 100.0}) 
+```
 
-#The second Hopf produces a limit cycle that vanishes at another Hopf (which auto labels as 'BP' when continuing limit-cycles)
+The second Hopf produces a limit cycle that vanishes at another Hopf (which auto labels as `BP` when continuing limit-cycles)
+
+```
 hb2=fp('HB2')
 lc2=run(hb2,IPS=2,ISP=2,ICP=[1,11,2,3,4],NMX=20000,ISW=1, STOP=['BP1'])
 ```
