@@ -22,12 +22,12 @@ F. Grimbert, O. Faugeras; Bifurcation Analysis of Jansen's Neural Mass Model. Ne
 Here we provide the necessary files and a steb-by-steb commands for the Python interface of auto-07p
 to generate the bifurcation diagram of the system.
 
-## Provided files:
+## Provided files
 
 * `jrnmm.f90`:  Encodes the system equations, the corresponding Jacobian, and a function to save maxima and minima of limit-cycles in the system variable $y=y_1-y_2$ [(download it here)](https://github.com/pclus/auto-tutorial/blob/main/src/Jansen/jrnmm.f90).
 * `c.jrnmm`: constants of auto-07p [(download it here)](https://github.com/pclus/auto-tutorial/blob/main/src/Jansen/c.jrnmm).
 
-## Tutorial:
+## Continuation of fixed points
 
 We start by obtaining the fixed points as a function of the parameter $p$.
 Thanks to the functions `GETUY_MIN` and `GETUY_MAX` defined in the `jrnmm.f90` file, auto-07p returns the values of 'y' as defined in [[1]](#1).
@@ -96,6 +96,7 @@ for b in bfp:
 plt.scatter(fp['p'],fp['y1'] - fp['y2'], c=2 * (pt_vals(fp) < 0), cmap='Purples', s=0.1)
 ```
 
+## Continuation of periodic orbits
 
 Now we can proceed to compute the limit-cycles and their stability.
 
