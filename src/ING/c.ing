@@ -1,0 +1,10 @@
+unames = {1: 'v2', 2: 'r2',  3: 's2', 4: 'z2'}
+parnames = {1: 'etta', 2: 'C', 3 : 'y_min', 4 : 'y_max' }
+NDIM=   4, IPS =   1, IRS =   0, ILP =   1
+ICP =  ['etta','C',3,4]
+NTST=  100, NCOL=   7, IAD =   3, ISP =   1, ISW = 1, IPLT= 0, NBC= 0, NINT= 0
+NMX=  1000, NPR=  500, MXBF=  -1, IID =   2, ITMX= 8, ITNW= 7, NWTN= 3, JAC= 1
+EPSL= 1e-07, EPSU = 1e-07, EPSS = 1e-05
+DS  =   0.01, DSMIN=  0.00001, DSMAX=  0.1, IADS=   1
+NPAR = 4, THL =  {}, THU =  {}
+UZR =  { }
